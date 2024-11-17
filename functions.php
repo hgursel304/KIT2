@@ -18,11 +18,6 @@ try {
     die("Database connection failed: " . $e->getMessage());
 }
 
-function queryMysql($query) {
-    global $pdo;
-    return $pdo->query($query);
-}
-
 function sanitizeString($var) {
     return htmlentities(strip_tags($var), ENT_QUOTES, 'UTF-8');
 }
