@@ -22,14 +22,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 ?>
 <!DOCTYPE html>
 <html>
-<head><title>Login</title></head>
+<head>
+    <title>Login</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
 <body>
-<h2>Login</h2>
-<p><?php echo $error; ?></p>
-<form method="post">
-    <label>Username:</label> <input type="text" name="user" required>
-    <label>Password:</label> <input type="password" name="pass" required>
-    <button type="submit">Login</button>
-</form>
+    <div class="container">
+        <h2>KIT2 User Login</h2>
+        <form method="post">
+            <label for="user">Username:</label>
+            <input type="text" id="user" name="user" required>
+            
+            <label for="pass">Password:</label>
+            <input type="password" id="pass" name="pass" required>
+            
+            <button type="submit">Login</button>
+        </form>
+        
+        <!-- Sign Up Button -->
+        <p>Don't have an account?</p>
+        <a href="signup.php" class="signup-button">Sign Up</a>
+    </div>
 </body>
 </html>

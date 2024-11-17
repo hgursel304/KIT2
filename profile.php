@@ -20,12 +20,17 @@ $profile = $stmt->fetchColumn();
 ?>
 <!DOCTYPE html>
 <html>
-<head><title>Profile</title></head>
+<head>
+    <title>Profile</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
 <body>
 <h2>Your Profile</h2>
-<form method="post">
-    <textarea name="profile"><?php echo htmlspecialchars($profile); ?></textarea>
-    <button type="submit">Save</button>
-</form>
+<div class="container">
+    <form method="post">
+        <textarea name="profile"><?php echo htmlspecialchars($profile); ?></textarea>
+        <button type="submit">Save</button>
+    </form>
+</div>
 </body>
 </html>

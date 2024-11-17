@@ -22,7 +22,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 ?>
 <!DOCTYPE html>
 <html>
-<head><title>Friends</title></head>
+<head>
+    <title>Friends</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+
+</head>
 <body>
 <h2>Your Friends</h2>
 <ul>

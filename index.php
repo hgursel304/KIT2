@@ -13,17 +13,28 @@ $users = $stmt->fetchAll();
 ?>
 <!DOCTYPE html>
 <html>
-<head><title>Home</title></head>
+<head>
+    <title>Home</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
 <body>
-<h2>Welcome, <?php echo htmlspecialchars($user); ?>!</h2>
-<a href="profile.php">Your Profile</a> | 
-<a href="friends.php">Friends</a> | 
-<a href="logout.php">Log Out</a>
-<h3>Other Users</h3>
-<ul>
-    <?php foreach ($users as $row): ?>
-        <li><?php echo htmlspecialchars($row['user']); ?></li>
-    <?php endforeach; ?>
-</ul>
+    <div class="container">
+        <h1>KIT2</h1>
+        <p class="welcome">Welcome, <strong><?php echo htmlspecialchars($user); ?></strong>!</p>
+        
+        <!-- Navigation links -->
+        <nav>
+            <a href="profile.php" class="nav-link">Your Profile</a>
+            <a href="friends.php" class="nav-link">Friends</a>
+            <a href="logout.php" class="nav-link">Log Out</a>
+        </nav>
+
+        <h2>Other Users</h2>
+        <ul>
+            <?php foreach ($users as $row): ?>
+                <li><?php echo htmlspecialchars($row['user']); ?></li>
+            <?php endforeach; ?>
+        </ul>
+    </div>
 </body>
 </html>
