@@ -57,6 +57,17 @@ This guide outlines the steps to set up the **KIT2** project, including database
 - Navigate to the `AMPPS/www/` directory.
 - Create a folder named `kit2`.
 ## Additional DB Config
+1. Profile Picture
 ```sql
 ALTER TABLE members ADD COLUMN profile_picture VARCHAR(255) DEFAULT 'default.png';
+```
+2. Posts
+```sql
+CREATE TABLE posts (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user VARCHAR(50) NOT NULL,
+    text TEXT,
+    image VARCHAR(255),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
 ```

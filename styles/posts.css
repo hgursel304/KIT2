@@ -1,0 +1,30 @@
+/* Posts */
+.post-form {
+    margin-bottom: 20px;
+}
+
+.post {
+    margin-bottom: 20px;
+    padding: 10px;
+    background: #f9f9f9;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.post p {
+    margin: 5px 0;
+}
+
+.post img {
+    max-width: 100%;
+    height: auto;
+    margin-top: 10px;
+    border-radius: 5px;
+}
+
+.post small {
+    display: block;
+    margin-top: 10px;
+    color: #666;
+    font-size: 0.9rem;
+}
