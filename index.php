@@ -53,7 +53,7 @@ $posts = $stmt->fetchAll();
         <!-- Left column -->
         <div class="left-column">
             <img src="<?php echo $profilePicture; ?>" alt="Your Profile Picture" class="profile-picture">
-            <p><strong><?php echo htmlspecialchars($user); ?></strong></p>
+            <h2><?php echo htmlspecialchars($user); ?></h2>
             <nav>
                 <a href="profile.php" class="nav-link">Profile</a>
                 <a href="friends.php" class="nav-link">Friends</a>

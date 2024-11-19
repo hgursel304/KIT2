@@ -39,32 +39,40 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 ?>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Sign Up</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KIT2 Sign Up</title>
     <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
     <div class="container">
-        <h2>KIT2 User Sign Up</h2>
-        <?php if ($error): ?>
-            <p style="color: red;"><?php echo htmlspecialchars($error); ?></p>
-        <?php endif; ?>
-        <form method="post" enctype="multipart/form-data">
-            <label for="user">Username:</label>
-            <input type="text" id="user" name="user" required>
-            
-            <label for="pass">Password:</label>
-            <input type="password" id="pass" name="pass" required>
-            
-            <label for="profile_picture">Profile Picture (JPEG/PNG):</label>
-            <input type="file" id="profile_picture" name="profile_picture" accept="image/jpeg, image/png">
+        <div class="signup-box">
+            <h2>KIT2 User Sign Up</h2>
+            <?php if ($error): ?>
+                <p class="error-message"><?php echo htmlspecialchars($error); ?></p>
+            <?php endif; ?>
+            <form method="post" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="user">Username:</label>
+                    <input type="text" id="user" name="user" placeholder="Enter your username" required>
+                </div>
 
-            <button type="submit">Sign Up</button>
-        </form>
-        
-        <p>Already have an account?</p>
-        <a href="login.php" class="signup-button">Log In</a>
+                <div class="form-group">
+                    <label for="pass">Password:</label>
+                    <input type="password" id="pass" name="pass" placeholder="Enter your password" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="profile_picture">Profile Picture (JPEG/PNG):</label>
+                    <input type="file" id="profile_picture" name="profile_picture" accept="image/jpeg, image/png">
+                </div>
+
+                <button type="submit">Sign Up</button>
+            </form>
+            <p class="login-link">Already have an account? <a href="login.php">Log In</a></p>
+        </div>
     </div>
 </body>
 </html>

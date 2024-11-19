@@ -21,27 +21,35 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 ?>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Login</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KIT2 Login</title>
     <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
     <div class="container">
-        <h2>KIT2 User Login</h2>
-        <form method="post">
-            <label for="user">Username:</label>
-            <input type="text" id="user" name="user" required>
-            
-            <label for="pass">Password:</label>
-            <input type="password" id="pass" name="pass" required>
-            
-            <button type="submit">Login</button>
-        </form>
-        
-        <!-- Sign Up Button -->
-        <p>Don't have an account?</p>
-        <a href="signup.php" class="signup-button">Sign Up</a>
+            <div class="login-box">
+                <h2>KIT2</h2>
+                <form method="post">
+                    <div class="form-group">
+                        <label for="user">Username:</label>
+                        <input type="text" id="user" name="user" placeholder="Enter your username" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="pass">Password:</label>
+                        <input type="password" id="pass" name="pass" placeholder="Enter your password" required>
+                    </div>
+
+                    <button type="submit">Login</button>
+                    <?php if ($error): ?>
+                        <p class="error-message"><?php echo $error; ?></p>
+                    <?php endif; ?>
+                </form>
+                <p class="signup-link">Don't have an account? <a href="signup.php">Sign Up</a></p>
+            </div>
     </div>
 </body>
 </html>
