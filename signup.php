@@ -5,13 +5,21 @@ $error = '';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $user = sanitizeString($_POST['user']);
     $pass = sanitizeString($_POST['pass']);
+    $confirmPass = sanitizeString($_POST['confirm_pass']);
     $firstName = sanitizeString($_POST['first_name']);
     $lastName = sanitizeString($_POST['last_name']);
     $title = sanitizeString($_POST['title']);
     $profilePicture = 'default.png'; // Default profile picture
 
-    if ($user === '' || $pass === '' || $firstName === '' || $lastName === '') {
+    // Password complexity validation regex
+    $passwordPattern = '/^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%_&*]).{8,}$/';
+
+    if ($user === '' || $pass === '' || $confirmPass === '' || $firstName === '' || $lastName === '') {
         $error = "All fields are required except title.";
+    } elseif ($pass !== $confirmPass) {
+        $error = "Passwords do not match.";
+    } elseif (!preg_match($passwordPattern, $pass)) {
+        $error = "Password must be at least 8 characters long and include at least one uppercase letter, one number, and one special character (!@#$%_&*).";
     } else {
         $stmt = $pdo->prepare("SELECT * FROM members WHERE user = ?");
         $stmt->execute([$user]);
@@ -75,6 +83,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <div class="form-group">
                     <label for="pass">Password:</label>
                     <input type="password" id="pass" name="pass" placeholder="Enter your password" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="confirm_pass">Confirm Password:</label>
+                    <input type="password" id="confirm_pass" name="confirm_pass" placeholder="Re-enter your password" required>
                 </div>
 
                 <div class="form-group">

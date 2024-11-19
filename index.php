@@ -61,12 +61,14 @@ $posts = $stmt->fetchAll();
             <?php if (!empty($profileData['title'])): ?>
                 <p><?php echo htmlspecialchars($profileData['title']); ?></p>
             <?php endif; ?>
+            <hr>
             <nav>
                 <a href="my_profile.php" class="nav-link">My Profile</a>
                 <a href="messages.php" class="nav-link">Messages</a>
                 <a href="people.php" class="nav-link">People</a>
                 <a href="logout.php" class="nav-link">Logout</a>
             </nav>
+            <hr>
         </div>
 
         <!-- Right column -->
