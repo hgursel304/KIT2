@@ -71,18 +71,27 @@ $posts = $stmt->fetchAll();
 
         <!-- Right column -->
         <div class="right-column">
-            <h1>KIT2</h1>
+                <h1 class="centered">KIT2</h1>
             <form method="post" enctype="multipart/form-data" class="post-form">
                 <textarea name="text" placeholder="What's on your mind?" maxlength="500"></textarea>
-                <input type="file" name="image" accept="image/jpeg, image/png">
-                <button type="submit">Post</button>
+                <div class="post-controls">
+                    <input type="file" name="image" accept="image/jpeg, image/png">
+                     <button type="submit" class="post-button">Post</button>
+                </div>
+
             </form>
 
             <!-- Posts Section -->
-            <h2>Posts</h2>
+            <h2 class="centered">Posts</h2>
             <?php foreach ($posts as $post): ?>
                 <div class="post">
-                    <p><strong><?php echo htmlspecialchars($post['first_name'] . ' ' . $post['last_name']); ?></strong></p>
+                    <p>
+                        <strong>
+                            <a href="profile.php?user=<?php echo urlencode($post['user']); ?>" class="post-author">
+                                <?php echo htmlspecialchars($post['first_name'] . ' ' . $post['last_name']); ?>
+                            </a>
+                        </strong>
+                    </p>
                     <?php if ($post['image']): ?>
                         <img src="img/posts/<?php echo $post['image']; ?>" alt="Post Image" class="post-image">
                     <?php endif; ?>
