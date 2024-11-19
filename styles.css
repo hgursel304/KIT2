@@ -344,3 +344,33 @@ button:hover {
     color: #666;
     margin: 0;
 }
+/* Profile Link Styling */
+.profile-link, .member-name-link {
+    text-decoration: none;
+    color: inherit;
+}
+
+.profile-link:hover, .member-name-link:hover {
+    text-decoration: underline;
+    color: #007bff;
+}
+
+/* Delete Button */
+.delete-post-form {
+    margin-top: 10px;
+}
+
+.delete-button {
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    font-size: 0.9rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.delete-button:hover {
+    background-color: #e60000;
+}

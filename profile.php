@@ -7,78 +7,72 @@ if (!isset($_SESSION['user'])) {
     exit;
 }
 
-$user = $_SESSION['user'];
-$profilePicture = getProfilePicture($user);
+// Get the logged-in user
+$loggedInUser = $_SESSION['user'];
 
-// Handle Profile Picture Upload
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['profile_picture'])) {
-    $targetDir = "img/profiles/";
-    $imageName = uniqid() . "-" . basename($_FILES['profile_picture']['name']);
-    $targetFile = $targetDir . $imageName;
+// Get the user parameter for the profile page
+$profileUser = isset($_GET['user']) ? $_GET['user'] : null;
 
-    // Allow only jpeg and png files
-    $fileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
-    if (in_array($fileType, ['jpeg', 'jpg', 'png'])) {
-        if (move_uploaded_file($_FILES['profile_picture']['tmp_name'], $targetFile)) {
-            // Update the database with the new profile picture
-            $stmt = $pdo->prepare("UPDATE users SET profile_picture = ? WHERE username = ?");
-            $stmt->execute([$imageName, $user]);
-            $profilePicture = $targetFile;
-        } else {
-            echo "<p>Failed to upload the profile picture.</p>";
-        }
-    } else {
-        echo "<p>Invalid file type. Only JPEG and PNG are allowed.</p>";
-    }
+if (!$profileUser) {
+    header("Location: people.php");
+    exit;
 }
 
-// Fetch user's posts
+// Fetch the profile user's data
+$profileStmt = $pdo->prepare("SELECT first_name, last_name, title, profile_picture FROM members WHERE user = ?");
+$profileStmt->execute([$profileUser]);
+$profileData = $profileStmt->fetch();
+
+if (!$profileData) {
+    echo "<p>User not found!</p>";
+    exit;
+}
+
+// Fetch profile user's posts
 $stmt = $pdo->prepare("SELECT * FROM posts WHERE user = ? ORDER BY created_at DESC");
-$stmt->execute([$user]);
+$stmt->execute([$profileUser]);
 $posts = $stmt->fetchAll();
 ?>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Your Profile</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile of <?php echo htmlspecialchars($profileData['first_name'] . ' ' . $profileData['last_name']); ?></title>
     <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
     <div class="container">
         <!-- Left column -->
         <div class="left-column">
-            <img src="<?php echo $profilePicture; ?>" alt="Your Profile Picture" class="profile-picture">
-            <p><strong><?php echo htmlspecialchars($user); ?></strong></p>
+            <img src="img/profiles/<?php echo htmlspecialchars($profileData['profile_picture']); ?>" alt="Profile Picture" class="profile-picture">
+            <h2><?php echo htmlspecialchars($profileData['first_name'] . ' ' . $profileData['last_name']); ?></h2>
+            <?php if (!empty($profileData['title'])): ?>
+                <p><?php echo htmlspecialchars($profileData['title']); ?></p>
+            <?php endif; ?>
             <nav>
                 <a href="index.php" class="nav-link">Home</a>
-                <a href="friends.php" class="nav-link">Friends</a>
                 <a href="logout.php" class="nav-link">Logout</a>
             </nav>
-            <hr>
-            <h2>Change Profile Picture</h2>
-            <form method="post" enctype="multipart/form-data">
-                <input type="file" name="profile_picture" accept="image/jpeg, image/png">
-                <button type="submit">Update Picture</button>
-            </form>
         </div>
 
         <!-- Right column -->
         <div class="right-column">
-            <h1>Your Posts</h1>
+            <h1><?php echo htmlspecialchars($profileData['first_name'] . "'s Posts"); ?></h1>
             <?php if ($posts): ?>
                 <?php foreach ($posts as $post): ?>
                     <div class="post">
+                        <?php if ($post['image']): ?>
+                            <img src="img/posts/<?php echo htmlspecialchars($post['image']); ?>" alt="Post Image" class="post-image">
+                        <?php endif; ?>
                         <?php if ($post['text']): ?>
                             <p><?php echo htmlspecialchars($post['text']); ?></p>
-                        <?php endif; ?>
-                        <?php if ($post['image']): ?>
-                            <img src="img/posts/<?php echo $post['image']; ?>" alt="Post Image" class="post-image">
                         <?php endif; ?>
                         <small>Posted on <?php echo $post['created_at']; ?></small>
                     </div>
                 <?php endforeach; ?>
             <?php else: ?>
-                <p>You have no posts yet.</p>
+                <p>No posts yet.</p>
             <?php endif; ?>
         </div>
     </div>

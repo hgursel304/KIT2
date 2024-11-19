@@ -62,7 +62,7 @@ $posts = $stmt->fetchAll();
                 <p><?php echo htmlspecialchars($profileData['title']); ?></p>
             <?php endif; ?>
             <nav>
-                <a href="profile.php" class="nav-link">Profile</a>
+                <a href="my_profile.php" class="nav-link">My Profile</a>
                 <a href="messages.php" class="nav-link">Messages</a>
                 <a href="people.php" class="nav-link">People</a>
                 <a href="logout.php" class="nav-link">Logout</a>
@@ -83,11 +83,11 @@ $posts = $stmt->fetchAll();
             <?php foreach ($posts as $post): ?>
                 <div class="post">
                     <p><strong><?php echo htmlspecialchars($post['first_name'] . ' ' . $post['last_name']); ?></strong></p>
-                    <?php if ($post['text']): ?>
-                        <p><?php echo htmlspecialchars($post['text']); ?></p>
-                    <?php endif; ?>
                     <?php if ($post['image']): ?>
                         <img src="img/posts/<?php echo $post['image']; ?>" alt="Post Image" class="post-image">
+                    <?php endif; ?>
+                    <?php if ($post['text']): ?>
+                        <p><?php echo htmlspecialchars($post['text']); ?></p>
                     <?php endif; ?>
                     <small>Posted on <?php echo $post['created_at']; ?></small>
                 </div>
