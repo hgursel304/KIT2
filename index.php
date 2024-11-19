@@ -8,6 +8,9 @@ if (!isset($_SESSION['user'])) {
 }
 
 $user = $_SESSION['user'];
+$profilePicture = getProfilePicture($user); // Fetch the logged-in user's profile picture
+
+// Fetch other users excluding the logged-in user
 $stmt = $pdo->query("SELECT user FROM members WHERE user != '$user'");
 $users = $stmt->fetchAll();
 ?>
@@ -20,7 +23,11 @@ $users = $stmt->fetchAll();
 <body>
     <div class="container">
         <h1>KIT2</h1>
-        <p class="welcome">Welcome, <strong><?php echo htmlspecialchars($user); ?></strong>!</p>
+        <!-- Display user profile picture and welcome message -->
+        <div class="welcome-section">
+            <img src="<?php echo $profilePicture; ?>" alt="Your Profile Picture" class="profile-picture">
+            <p class="welcome">Welcome, <strong><?php echo htmlspecialchars($user); ?></strong>!</p>
+        </div>
         
         <!-- Navigation links -->
         <nav>
@@ -29,8 +36,9 @@ $users = $stmt->fetchAll();
             <a href="logout.php" class="nav-link">Log Out</a>
         </nav>
 
+        <!-- Display other users -->
         <h2>Other Users</h2>
-        <ul>
+        <ul class="user-list">
             <?php foreach ($users as $row): ?>
                 <li><?php echo htmlspecialchars($row['user']); ?></li>
             <?php endforeach; ?>

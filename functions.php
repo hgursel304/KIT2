@@ -1,8 +1,8 @@
 <?php
 $host = 'localhost';
 $data = 'kit2';
-$user = 'root'; // AMPPS default user
-$pass = 'mysql'; // AMPPS default password
+$user = 'root';
+$pass = 'mysql';
 $chrs = 'utf8mb4';
 $attr = "mysql:host=$host;dbname=$data;charset=$chrs";
 
@@ -20,5 +20,17 @@ try {
 
 function sanitizeString($var) {
     return htmlentities(strip_tags($var), ENT_QUOTES, 'UTF-8');
+}
+
+function getProfilePicture($user) {
+    global $pdo;
+    $stmt = $pdo->prepare("SELECT profile_picture FROM members WHERE user = ?");
+    $stmt->execute([$user]);
+    $picture = $stmt->fetchColumn();
+
+    if ($picture && file_exists("img/profiles/$picture")) {
+        return "img/profiles/$picture";
+    }
+    return "img/profiles/default.png";
 }
 ?>

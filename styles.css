@@ -139,3 +139,35 @@ footer {
 .signup-button:hover {
     background-color: #218838;
 }
+
+/* Profile picture for the welcome section */
+.profile-picture {
+    width: 120px; /* Fixed width */
+    height: 120px; /* Fixed height */
+    object-fit: cover; /* Crop image to fit */
+    border-radius: 50%; /* Circular profile picture */
+    margin: 10px 0;
+}
+
+/* Smaller profile pictures for the user list */
+.small-profile-picture {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-right: 10px;
+    vertical-align: middle;
+}
+
+/* User list styles */
+.user-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.user-list li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    font-size: 1rem;
+}
