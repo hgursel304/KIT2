@@ -296,3 +296,51 @@ button:hover {
     color: #666;
     margin-bottom: 10px;
 }
+
+/* Members List Layout */
+.members-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.member-row {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.light-row {
+    background-color: #ffffff;
+}
+
+.dark-row {
+    background-color: #f9f9f9;
+}
+
+.member-profile-picture {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-right: 15px;
+}
+
+.member-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.member-name {
+    font-weight: bold;
+    font-size: 1rem;
+    margin: 0;
+}
+
+.member-title {
+    font-size: 0.9rem;
+    color: #666;
+    margin: 0;
+}
