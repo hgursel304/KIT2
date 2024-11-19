@@ -8,7 +8,9 @@ if (!isset($_SESSION['user'])) {
 }
 
 $user = $_SESSION['user'];
-$profilePicture = getProfilePicture($user);
+$profileStmt = $pdo->prepare("SELECT first_name, last_name, title, profile_picture FROM members WHERE user = ?");
+$profileStmt->execute([$user]);
+$profileData = $profileStmt->fetch();
 
 // Handle Post Submission
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -39,12 +41,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 // Fetch posts to display
-$stmt = $pdo->query("SELECT * FROM posts ORDER BY created_at DESC");
+$stmt = $pdo->query("SELECT posts.*, members.first_name, members.last_name FROM posts INNER JOIN members ON posts.user = members.user ORDER BY posts.created_at DESC");
 $posts = $stmt->fetchAll();
 ?>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
     <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
@@ -52,30 +56,17 @@ $posts = $stmt->fetchAll();
     <div class="container">
         <!-- Left column -->
         <div class="left-column">
-            <img src="<?php echo $profilePicture; ?>" alt="Your Profile Picture" class="profile-picture">
-            <h2><?php echo htmlspecialchars($user); ?></h2>
+            <img src="img/profiles/<?php echo htmlspecialchars($profileData['profile_picture']); ?>" alt="Your Profile Picture" class="profile-picture">
+            <h2><?php echo htmlspecialchars($profileData['first_name'] . ' ' . $profileData['last_name']); ?></h2>
+            <?php if (!empty($profileData['title'])): ?>
+                <p><?php echo htmlspecialchars($profileData['title']); ?></p>
+            <?php endif; ?>
             <nav>
                 <a href="profile.php" class="nav-link">Profile</a>
-                <a href="friends.php" class="nav-link">Friends</a>
+                <a href="messages.php" class="nav-link">Messages</a>
+                <a href="friends.php" class="nav-link">People</a>
                 <a href="logout.php" class="nav-link">Logout</a>
             </nav>
-
-            <!-- Friends Section -->
-            <h2>Your Friends</h2>
-            <?php
-            $friendsStmt = $pdo->prepare("SELECT friend FROM friends WHERE user = ?");
-            $friendsStmt->execute([$user]);
-            $friends = $friendsStmt->fetchAll(PDO::FETCH_COLUMN);
-
-            if ($friends): ?>
-                <ul class="friends-list">
-                    <?php foreach ($friends as $friend): ?>
-                        <li><?php echo htmlspecialchars($friend); ?></li>
-                    <?php endforeach; ?>
-                </ul>
-            <?php else: ?>
-                <p>You have no friends added yet.</p>
-            <?php endif; ?>
         </div>
 
         <!-- Right column -->
@@ -91,7 +82,7 @@ $posts = $stmt->fetchAll();
             <h2>Posts</h2>
             <?php foreach ($posts as $post): ?>
                 <div class="post">
-                    <p><strong><?php echo htmlspecialchars($post['user']); ?></strong></p>
+                    <p><strong><?php echo htmlspecialchars($post['first_name'] . ' ' . $post['last_name']); ?></strong></p>
                     <?php if ($post['text']): ?>
                         <p><?php echo htmlspecialchars($post['text']); ?></p>
                     <?php endif; ?>

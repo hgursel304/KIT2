@@ -5,10 +5,13 @@ $error = '';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $user = sanitizeString($_POST['user']);
     $pass = sanitizeString($_POST['pass']);
+    $firstName = sanitizeString($_POST['first_name']);
+    $lastName = sanitizeString($_POST['last_name']);
+    $title = sanitizeString($_POST['title']);
     $profilePicture = 'default.png'; // Default profile picture
 
-    if ($user === '' || $pass === '') {
-        $error = "All fields are required.";
+    if ($user === '' || $pass === '' || $firstName === '' || $lastName === '') {
+        $error = "All fields are required except title.";
     } else {
         $stmt = $pdo->prepare("SELECT * FROM members WHERE user = ?");
         $stmt->execute([$user]);
@@ -29,8 +32,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             if (!$error) {
                 $hashedPass = password_hash($pass, PASSWORD_DEFAULT);
-                $stmt = $pdo->prepare("INSERT INTO members (user, pass, profile_picture) VALUES (?, ?, ?)");
-                $stmt->execute([$user, $hashedPass, $profilePicture]);
+                $stmt = $pdo->prepare("INSERT INTO members (user, pass, first_name, last_name, title, profile_picture) VALUES (?, ?, ?, ?, ?, ?)");
+                $stmt->execute([$user, $hashedPass, $firstName, $lastName, $title, $profilePicture]);
                 echo "<script>alert('Account created successfully! Please log in.'); window.location.href = 'login.php';</script>";
                 exit;
             }
@@ -55,6 +58,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <?php endif; ?>
             <form method="post" enctype="multipart/form-data">
                 <div class="form-group">
+                    <label for="first_name">First Name:</label>
+                    <input type="text" id="first_name" name="first_name" placeholder="Enter your first name" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="last_name">Last Name:</label>
+                    <input type="text" id="last_name" name="last_name" placeholder="Enter your last name" required>
+                </div>
+
+                <div class="form-group">
                     <label for="user">Username:</label>
                     <input type="text" id="user" name="user" placeholder="Enter your username" required>
                 </div>
@@ -62,6 +75,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <div class="form-group">
                     <label for="pass">Password:</label>
                     <input type="password" id="pass" name="pass" placeholder="Enter your password" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="title">Title:</label>
+                    <input type="text" id="title" name="title" placeholder="Optional: Enter your title">
                 </div>
 
                 <div class="form-group">
