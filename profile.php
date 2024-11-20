@@ -54,6 +54,9 @@ $posts = $stmt->fetchAll();
                 <a href="index.php" class="nav-link">Home</a>
                 <a href="logout.php" class="nav-link">Logout</a>
             </nav>
+            <hr>
+            <!-- Messaging Feature -->
+            <a href="messages.php?recipient=<?php echo urlencode($profileUser); ?>" class="message-button">Message</a>
         </div>
 
         <!-- Right column -->
