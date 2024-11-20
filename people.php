@@ -33,8 +33,9 @@ $members = $membersStmt->fetchAll();
             <img src="img/profiles/<?php echo htmlspecialchars($profileData['profile_picture']); ?>" alt="Your Profile Picture" class="profile-picture">
             <h2><?php echo htmlspecialchars($profileData['first_name'] . ' ' . $profileData['last_name']); ?></h2>
             <?php if (!empty($profileData['title'])): ?>
-                <p><?php echo htmlspecialchars($profileData['title']); ?></p>
+                <p class="member-title"><?php echo htmlspecialchars($profileData['title']); ?></p>
             <?php endif; ?>
+            <div style="width: 70px; height: 1px; background-color: #000; margin: 10px auto;"></div>
             <nav>
                 <a href="index.php" class="nav-link">Home</a>
                 <a href="my_profile.php" class="nav-link">My Profile</a>

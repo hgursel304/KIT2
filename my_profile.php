@@ -64,15 +64,16 @@ $posts = $stmt->fetchAll();
             <img src="img/profiles/<?php echo htmlspecialchars($profileData['profile_picture']); ?>" alt="Your Profile Picture" class="profile-picture">
             <h2><?php echo htmlspecialchars($profileData['first_name'] . ' ' . $profileData['last_name']); ?></h2>
             <?php if (!empty($profileData['title'])): ?>
-                <p><?php echo htmlspecialchars($profileData['title']); ?></p>
+                <p class="member-title"><?php echo htmlspecialchars($profileData['title']); ?></p>
             <?php endif; ?>
+            <div style="width: 70px; height: 1px; background-color: #000; margin: 10px auto;"></div>
             <nav>
                 <a href="index.php" class="nav-link">Home</a>
                 <a href="people.php" class="nav-link">People</a>
                 <a href="logout.php" class="nav-link">Logout</a>
             </nav>
             <hr>
-            <h2>Change Profile Picture</h2>
+            <h3>Change Profile Picture</h3>
             <form method="post" enctype="multipart/form-data">
                 <input type="file" name="profile_picture" accept="image/jpeg, image/png">
                 <button type="submit">Update Picture</button>
