@@ -31,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <body>
     <div class="container">
             <div class="login-box">
-                <h2>KIT2</h2>
+                <h1 class="logo">KIT2</h1>
                 <form method="post">
                     <div class="form-group">
                         <label for="user">Username:</label>

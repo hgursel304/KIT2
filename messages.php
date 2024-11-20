@@ -115,15 +115,13 @@ if ($receiver) {
 
         <!-- Right Column -->
         <div class="right-column">
-            <div class="right-header">
-                <h1>Messages</h1>
+                <h1 class="centered">Messages</h1>
                 <button onclick="location.reload();" class="refresh-button">Refresh</button>
-            </div>
             <?php if ($receiver): ?>
                 <div class="messages-container">
                     <?php foreach ($messages as $message): ?>
                         <div class="<?php echo $message['sender'] === $user ? 'sent-message' : 'received-message'; ?>" style="background-color: <?php echo $message['sender'] === $user ? ' #f9f9f9' : '#f0f0f0'; ?>">
-                            <p><strong><?php echo htmlspecialchars($message['first_name'] . ' ' . $message['last_name']); ?></strong></p>
+                            <p><strong><?php echo htmlspecialchars($message['first_name']); ?></strong></p>
                             <p><?php echo htmlspecialchars($message['message']); ?></p>
                             <small><?php echo $message['created_at']; ?></small>
                         </div>

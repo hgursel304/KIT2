@@ -49,7 +49,7 @@ $posts = $stmt->fetchAll();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
+    <title>KIT2 | Home</title>
     <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
@@ -72,7 +72,7 @@ $posts = $stmt->fetchAll();
 
         <!-- Right column -->
         <div class="right-column">
-                <h1 class="centered">KIT2</h1>
+                <h1 class="logo">KIT2 | <span class="slogan"> Community at Work</span></h1>
             <form method="post" enctype="multipart/form-data" class="post-form">
                 <textarea name="text" placeholder="What's on your mind?" maxlength="500"></textarea>
                 <div class="post-controls">
@@ -83,7 +83,6 @@ $posts = $stmt->fetchAll();
             </form>
 
             <!-- Posts Section -->
-            <h2 class="centered">Posts</h2>
             <?php foreach ($posts as $post): ?>
                 <div class="post">
                     <p>

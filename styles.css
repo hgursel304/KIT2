@@ -12,6 +12,26 @@ h1, h2, h3 {
     padding: 0;
 }
 
+.logo {
+    margin: 0;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    padding: 0;
+    font-size: 3em !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+span.slogan {
+    margin: 0;
+    font-family: Gill Sans, sans-serif;
+    padding: 8px;
+    font-size: 0.7em !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 ul {
     list-style: none;
     margin: 0;
@@ -56,7 +76,7 @@ ul {
 nav a {
     display: block; /* Display each link on a new line */
     margin: 5px 0; /* Adjusted spacing between links */
-    font-size: 1rem;
+    font-size: 1.2rem;
     color: #007bff;
     text-decoration: none;
     padding: 5px 0;
@@ -119,6 +139,9 @@ form button:hover {
     color: #666;
     font-size: 0.9rem;
 }
+post-button {
+    text-align: right;
+}
 
 /* Friends Section */
 .friends-list {
@@ -162,6 +185,12 @@ button {
     color: #fff;
     cursor: pointer;
     transition: background-color 0.3s ease;
+}
+
+button.refresh-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 button:hover {
@@ -407,5 +436,11 @@ textarea {
 .right-header {
     display: flex;
     justify-content: space-between;
+    align-items: center;
+}
+
+.centered {
+    display: flex;
+    justify-content: center;
     align-items: center;
 }

@@ -82,7 +82,7 @@ $posts = $stmt->fetchAll();
 
         <!-- Right column -->
         <div class="right-column">
-            <h1>Your Posts</h1>
+            <h1 class="centered">My Posts</h1>
             <?php if ($posts): ?>
                 <?php foreach ($posts as $post): ?>
                     <div class="post">
