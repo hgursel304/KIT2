@@ -45,7 +45,7 @@ $members = $membersStmt->fetchAll();
 
         <!-- Right column -->
         <div class="right-column">
-            <h1 class="centered">People</h1>
+            <h1 class="right-header">People</h1>
             <div class="members-list">
                 <?php foreach ($members as $index => $member): ?>
                     <div class="member-row <?php echo $index % 2 === 0 ? 'light-row' : 'dark-row'; ?>">

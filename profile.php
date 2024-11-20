@@ -19,7 +19,7 @@ if (!$profileUser) {
 }
 
 // Fetch the profile user's data
-$profileStmt = $pdo->prepare("SELECT first_name, last_name, title, profile_picture FROM members WHERE user = ?");
+$profileStmt = $pdo->prepare("SELECT first_name, last_name, title, profile_picture, about_me FROM members WHERE user = ?");
 $profileStmt->execute([$profileUser]);
 $profileData = $profileStmt->fetch();
 
@@ -50,19 +50,22 @@ $posts = $stmt->fetchAll();
             <?php if (!empty($profileData['title'])): ?>
                 <p class="member-title"><?php echo htmlspecialchars($profileData['title']); ?></p>
             <?php endif; ?>
+            <div style="width: 70px; height: 1px; background-color: #000; margin: 10px auto;"></div>
             <nav>
                 <a href="index.php" class="nav-link">Home</a>
+                <a href="people.php" class="nav-link">People</a>
                 <a href="logout.php" class="nav-link">Logout</a>
             </nav>
             <div style="width: 70px; height: 1px; background-color: #000; margin: 10px auto;"></div>
-            <hr>
             <!-- Messaging Feature -->
             <a href="messages.php?recipient=<?php echo urlencode($profileUser); ?>" class="message-button">Message</a>
         </div>
 
         <!-- Right column -->
         <div class="right-column">
-            <h1><?php echo htmlspecialchars($profileData['first_name'] . "'s Posts"); ?></h1>
+            <h1 class="right-header">About</h1>
+                <p class="centered"><?php echo nl2br(htmlspecialchars($profileData['about_me'])); ?></p>
+            <h1 class="right-header">Posts</h1>
             <?php if ($posts): ?>
                 <?php foreach ($posts as $post): ?>
                     <div class="post">

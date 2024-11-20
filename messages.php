@@ -115,7 +115,7 @@ if ($receiver) {
 
         <!-- Right Column -->
         <div class="right-column">
-                <h1 class="centered">Messages</h1>
+                <h1 class="right-header">Messages</h1>
                 <button onclick="location.reload();" class="refresh-button">Refresh</button>
             <?php if ($receiver): ?>
                 <div class="messages-container">
