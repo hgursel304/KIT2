@@ -80,6 +80,9 @@ if ($receiver) {
             <div style="width: 70px; height: 1px; background-color: #000; margin: 10px auto;"></div>
             <nav>
                 <a href="index.php" class="nav-link">Home</a>
+                <a href="my_profile.php" class="nav-link">My Profile</a>
+                <a href="friends.php" class="nav-link">Friends</a>
+                <a href="people.php" class="nav-link">People</a>
                 <a href="logout.php" class="nav-link">Logout</a>
             </nav>
             <hr>

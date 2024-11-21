@@ -364,18 +364,8 @@ button:hover {
     background-color: #f9f9f9;
 }
 
-.member-profile-picture {
-    width: 50px;
-    height: 50px;
-    object-fit: cover;
-    border-radius: 50%;
-    margin-right: 15px;
-}
 
-.member-info {
-    display: flex;
-    flex-direction: column;
-}
+
 
 .member-name {
     font-weight: bold;
@@ -479,7 +469,6 @@ textarea {
 container-full {
     display: flex;
     gap: 20px;
-    gap
     max-width: 1200px; 
     margin: 0 auto; 
     padding: 20px;
@@ -500,4 +489,45 @@ container-full {
     margin: 0;
     font-size: 1rem;
     color: #333;
+}
+
+.member-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 5px;
+}
+
+.member-profile-picture {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-right: 15px;
+}
+
+.member-info {
+    flex: 1;
+    margin-right: 15px;
+}
+
+.friend-form {
+    margin-left: auto;
+}
+
+.friend-button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    font-size: 0.9rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.friend-button:hover {
+    background-color: #0056b3;
 }

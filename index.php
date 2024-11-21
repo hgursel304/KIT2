@@ -38,6 +38,7 @@ $posts = $stmt->fetchAll();
             <nav>
                 <a href="my_profile.php" class="nav-link">My Profile</a>
                 <a href="messages.php" class="nav-link">Messages</a>
+                <a href="friends.php" class="nav-link">Friends</a>
                 <a href="people.php" class="nav-link">People</a>
                 <a href="logout.php" class="nav-link">Logout</a>
             </nav>
