@@ -23,10 +23,11 @@ $members = $membersStmt->fetchAll();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>People</title>
+    <title>KIT2 | People</title>
     <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
+    <div class="container-full">
     <div class="container">
         <!-- Left column -->
         <div class="left-column">
@@ -63,5 +64,10 @@ $members = $membersStmt->fetchAll();
             </div>
         </div>
     </div>
+<!-- Footer -->
+        <div class="footer">
+            <p>&copy; 2024 KIT2 | Community at Work</p>
+        </div>
+    </div>    
 </body>
 </html>

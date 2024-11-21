@@ -475,3 +475,29 @@ textarea {
     text-decoration: underline; 
     color: #333; 
 }
+
+container-full {
+    display: flex;
+    gap: 20px;
+    gap
+    max-width: 1200px; 
+    margin: 0 auto; 
+    padding: 20px;
+}
+
+.footer {
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    margin: auto;
+    margin-bottom: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    max-width: 1200px;
+}
+.footer p {
+    margin: 0;
+    font-size: 1rem;
+    color: #333;
+}

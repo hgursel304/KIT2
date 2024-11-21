@@ -25,6 +25,7 @@ $posts = $stmt->fetchAll();
     <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
+<div class="container-full">
     <div class="container">
         <!-- Left column -->
         <div class="left-column">
@@ -70,5 +71,10 @@ $posts = $stmt->fetchAll();
             <?php endforeach; ?>
         </div>
     </div>
+<!-- Footer -->
+        <div class="footer">
+            <p>&copy; 2024 KIT2 | Community at Work</p>
+        </div>
+    </div>    
 </body>
 </html>
