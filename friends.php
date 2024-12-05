@@ -60,6 +60,7 @@ $friends = $friendsStmt->fetchAll();
                 <a href="index.php" class="nav-link">Home</a>
                 <a href="my_profile.php" class="nav-link">My Profile</a>
                 <a href="messages.php" class="nav-link">Messages</a>
+                <span class="nav active">Friends</span>
                 <a href="people.php" class="nav-link">People</a>
                 <a href="logout.php" class="nav-link">Logout</a>
             </nav>

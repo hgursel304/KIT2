@@ -64,6 +64,7 @@ $friends = $friendsStmt->fetchAll(PDO::FETCH_COLUMN);
                 <a href="my_profile.php" class="nav-link">My Profile</a>
                 <a href="messages.php" class="nav-link">Messages</a>
                 <a href="friends.php" class="nav-link">Friends</a>
+                <span class="nav active">People</span>
                 <a href="logout.php" class="nav-link">Logout</a>
             </nav>
         </div>

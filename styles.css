@@ -95,6 +95,17 @@ nav a {
     transition: color 0.3s;
 }
 
+.nav.active {
+    display: block; /* Display each link on a new line */
+    margin: 5px 0; /* Adjusted spacing between links */
+    font-size: 1.2rem;
+    color: #0056b3;
+    text-decoration: none;
+    padding: 5px 0;
+    transition: color 0.3s;
+    font-weight: 600;
+}
+
 nav a:hover {
     color: #0056b3;
 }
@@ -530,4 +541,58 @@ container-full {
 
 .friend-button:hover {
     background-color: #0056b3;
+}
+
+.right-column-messages {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.right-column-container {
+    display: flex;
+    gap: 20px;
+}
+
+.right-conversations {
+    flex: 1;
+    max-width: 200px; /* Slimmer column for conversations */
+    border-right: 1px solid #ddd;
+    padding-right: 10px;
+}
+
+.right-messages {
+    flex: 3; /* Messages section takes up more space */
+    padding-left: 10px;
+}
+
+.post-filter {
+    display: flex;
+    justify-content: center; /* Centers the buttons horizontally */
+    align-items: center; /* Centers the content vertically if needed */
+    margin-bottom: 20px; /* Adds some space below the filter section */
+}
+
+.post-filter a {
+    text-decoration: none;
+    color: #333; /* Default text color */
+    font-size: 1rem;
+    margin: 0 10px; /* Adds space between the buttons */
+    padding: 8px 16px; /* Adds padding inside the buttons */
+    border: 1px solid #ccc; /* Button border */
+    border-radius: 4px; /* Rounded corners */
+    background-color: #f9f9f9; /* Default button background */
+    transition: all 0.3s ease; /* Smooth transition for hover effects */
+}
+
+.post-filter a.active {
+    background-color: #007bff; /* Active button background */
+    color: #fff; /* Active button text color */
+    border-color: #007bff; /* Active button border */
+}
+
+.post-filter a:hover {
+    background-color: #0056b3; /* Hover background color */
+    color: #fff; /* Hover text color */
+    border-color: #0056b3; /* Hover border */
 }

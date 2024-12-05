@@ -12,28 +12,8 @@ $profileStmt = $pdo->prepare("SELECT first_name, last_name, title, profile_pictu
 $profileStmt->execute([$user]);
 $profileData = $profileStmt->fetch();
 
-// Determine the post filter
-$filter = isset($_GET['filter']) && $_GET['filter'] === 'all' ? 'all' : 'friends';
-
-// Fetch posts based on filter
-if ($filter === 'friends') {
-    $stmt = $pdo->prepare(
-        "SELECT posts.*, members.first_name, members.last_name 
-        FROM posts 
-        INNER JOIN members ON posts.user = members.user 
-        WHERE posts.user IN (SELECT friend_id FROM friends WHERE user_id = ?) 
-        ORDER BY posts.created_at DESC"
-    );
-    $stmt->execute([$user]);
-} else {
-    $stmt = $pdo->query(
-        "SELECT posts.*, members.first_name, members.last_name 
-        FROM posts 
-        INNER JOIN members ON posts.user = members.user 
-        ORDER BY posts.created_at DESC"
-    );
-}
-
+// Fetch posts to display
+$stmt = $pdo->query("SELECT posts.*, members.first_name, members.last_name FROM posts INNER JOIN members ON posts.user = members.user ORDER BY posts.created_at DESC");
 $posts = $stmt->fetchAll();
 ?>
 <!DOCTYPE html>
@@ -72,19 +52,16 @@ $posts = $stmt->fetchAll();
                 <span class="divider"></span>
                 <span class="slogan">Community at Work</span>
             </p>
-            <!-- Filter Buttons -->
-            <div class="post-filter">
-                <a href="index.php?filter=friends" class="filter-button <?php echo $filter === 'friends' ? 'active' : ''; ?>">Friends</a>
-                <a href="index.php?filter=all" class="filter-button <?php echo $filter === 'all' ? 'active' : ''; ?>">All People</a>
-            </div>
             <!-- Posts Section -->
             <?php foreach ($posts as $post): ?>
                 <div class="post">
-                    <strong>
-                        <a href="profile.php?user=<?php echo urlencode($post['user']); ?>" class="post-author">
-                            <?php echo htmlspecialchars($post['first_name'] . ' ' . $post['last_name']); ?>
-                        </a>
-                    </strong>
+                    
+                        <strong>
+                            <a href="profile.php?user=<?php echo urlencode($post['user']); ?>" class="post-author">
+                                <?php echo htmlspecialchars($post['first_name'] . ' ' . $post['last_name']); ?>
+                            </a>
+                        </strong>
+                    
                     <?php if ($post['image']): ?>
                         <img src="img/posts/<?php echo $post['image']; ?>" alt="Post Image" class="post-image">
                     <?php endif; ?>
@@ -96,10 +73,10 @@ $posts = $stmt->fetchAll();
             <?php endforeach; ?>
         </div>
     </div>
-    <!-- Footer -->
-    <div class="footer">
-        <p>&copy; 2024 KIT2 | Community at Work</p>
-    </div>
-</div>
+<!-- Footer -->
+        <div class="footer">
+            <p>&copy; 2024 KIT2 | Community at Work</p>
+        </div>
+    </div>    
 </body>
 </html>

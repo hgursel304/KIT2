@@ -68,80 +68,72 @@ if ($receiver) {
 </head>
 <body>
     <div class="container-full">
-    <div class="container">
-        <!-- Left Column -->
-        <div class="left-column">
-            <!-- User Profile Section -->
-            <img src="img/profiles/<?php echo htmlspecialchars($profileData['profile_picture']); ?>" alt="Your Profile Picture" class="profile-picture">
-            <h2><?php echo htmlspecialchars($profileData['first_name'] . ' ' . $profileData['last_name']); ?></h2>
-            <?php if (!empty($profileData['title'])): ?>
-                <p class="member-title"><?php echo htmlspecialchars($profileData['title']); ?></p>
-            <?php endif; ?>
-            <div style="width: 70px; height: 1px; background-color: #000; margin: 10px auto;"></div>
-            <nav>
-                <a href="index.php" class="nav-link">Home</a>
-                <a href="my_profile.php" class="nav-link">My Profile</a>
-                <a href="friends.php" class="nav-link">Friends</a>
-                <a href="people.php" class="nav-link">People</a>
-                <a href="logout.php" class="nav-link">Logout</a>
-            </nav>
-            <hr>
-         
-            <!-- Conversations Section -->
-            <h2>Conversations</h2>
-               <!-- New Conversation Section -->
-               <button id="start-new-conversation" class="new-conversation-button">Start New Conversation</button>
-            <form id="new-conversation-form" method="get" action="messages.php" style="display: none;">
-                <select name="user" required>
-                    <option value="" disabled selected>Select a user</option>
-                    <?php foreach ($users as $userOption): ?>
-                        <option value="<?php echo htmlspecialchars($userOption['user']); ?>">
-                            <?php echo htmlspecialchars($userOption['first_name'] . ' ' . $userOption['last_name']); ?>
-                        </option>
-                    <?php endforeach; ?>
-                </select>
-                <button type="submit">Start</button>
-            </form>
-            </br>
-            <?php foreach ($conversations as $contact): ?>
-                <?php
-                $contactStmt = $pdo->prepare("SELECT first_name, last_name FROM members WHERE user = ?");
-                $contactStmt->execute([$contact]);
-                $contactData = $contactStmt->fetch();
-                ?>
+        <div class="container">
+            <!-- Left Column -->
+            <div class="left-column">
+                <!-- User Profile Section -->
+                <img src="img/profiles/<?php echo htmlspecialchars($profileData['profile_picture']); ?>" alt="Your Profile Picture" class="profile-picture">
+                <h2><?php echo htmlspecialchars($profileData['first_name'] . ' ' . $profileData['last_name']); ?></h2>
+                <?php if (!empty($profileData['title'])): ?>
+                    <p class="member-title"><?php echo htmlspecialchars($profileData['title']); ?></p>
+                <?php endif; ?>
+                <div style="width: 70px; height: 1px; background-color: #000; margin: 10px auto;"></div>
                 <nav>
-                <a href="messages.php?user=<?php echo urlencode($contact); ?>" class="nav-link">
-                    <?php echo htmlspecialchars($contactData['first_name'] . ' ' . $contactData['last_name']); ?>
-                </a>
+                    <a href="index.php" class="nav-link">Home</a>
+                    <a href="my_profile.php" class="nav-link">My Profile</a>
+                    <span class="nav active">Messages</span>
+                    <a href="friends.php" class="nav-link">Friends</a>
+                    <a href="people.php" class="nav-link">People</a>
+                    <a href="logout.php" class="nav-link">Logout</a>
                 </nav>
-            <?php endforeach; ?>
-        </div>
+            </div>
 
-        <!-- Right Column -->
-        <div class="right-column">
-                <h1 class="right-header">Messages</h1>
-                <button onclick="location.reload();" class="refresh-button">Refresh</button>
-            <?php if ($receiver): ?>
-                <div class="messages-container">
-                    <?php foreach ($messages as $message): ?>
-                        <div class="<?php echo $message['sender'] === $user ? 'sent-message' : 'received-message'; ?>" style="background-color: <?php echo $message['sender'] === $user ? ' #f9f9f9' : '#f0f0f0'; ?>">
-                            <p><strong><?php echo htmlspecialchars($message['first_name']); ?></strong></p>
-                            <p><?php echo htmlspecialchars($message['message']); ?></p>
-                            <small><?php echo $message['created_at']; ?></small>
-                        </div>
-                    <?php endforeach; ?>
+            <!-- Right Column -->
+            <div class="right-column">
+                <div class="right-column-container">
+                    <!-- Conversations Section -->
+                    <div class="right-conversations">
+                        <h2>Conversations</h2>
+                        <?php foreach ($conversations as $contact): ?>
+                            <?php
+                            $contactStmt = $pdo->prepare("SELECT first_name, last_name FROM members WHERE user = ?");
+                            $contactStmt->execute([$contact]);
+                            $contactData = $contactStmt->fetch();
+                            ?>
+                            <nav>
+                                <a href="messages.php?user=<?php echo urlencode($contact); ?>" class="nav-link">
+                                    <?php echo htmlspecialchars($contactData['first_name'] . ' ' . $contactData['last_name']); ?>
+                                </a>
+                            </nav>
+                        <?php endforeach; ?>
+                    </div>
+                    <!-- Messages Section -->
+                    <div class="right-messages">
+                        <h1 class="right-header">Messages</h1>
+                        <button onclick="location.reload();" class="refresh-button">Refresh</button>
+                        <?php if ($receiver): ?>
+                            <div class="messages-container">
+                                <?php foreach ($messages as $message): ?>
+                                    <div class="<?php echo $message['sender'] === $user ? 'sent-message' : 'received-message'; ?>" style="background-color: <?php echo $message['sender'] === $user ? ' #f9f9f9' : '#f0f0f0'; ?>">
+                                        <p><strong><?php echo htmlspecialchars($message['first_name']); ?></strong></p>
+                                        <p><?php echo htmlspecialchars($message['message']); ?></p>
+                                        <small><?php echo $message['created_at']; ?></small>
+                                    </div>
+                                <?php endforeach; ?>
+                            </div>
+                            <form method="post">
+                                <input type="hidden" name="receiver" value="<?php echo htmlspecialchars($receiver); ?>">
+                                <textarea name="message" placeholder="Type your message" required></textarea>
+                                <button type="submit">Send</button>
+                            </form>
+                        <?php else: ?>
+                            <p>Select a conversation or start a new one.</p>
+                        <?php endif; ?>
+                    </div>
                 </div>
-                <form method="post">
-                    <input type="hidden" name="receiver" value="<?php echo htmlspecialchars($receiver); ?>">
-                    <textarea name="message" placeholder="Type your message" required></textarea>
-                    <button type="submit">Send</button>
-                </form>
-            <?php else: ?>
-                <p>Select a conversation or start a new one.</p>
-            <?php endif; ?>
+            </div>
         </div>
-    </div>
-    <!-- Footer -->
+        <!-- Footer -->
         <div class="footer">
             <p>&copy; 2024 KIT2 | Community at Work</p>
         </div>
@@ -151,7 +143,5 @@ if ($receiver) {
             document.getElementById('new-conversation-form').style.display = 'block';
         });
     </script>
-   
 </body>
 </html>
-

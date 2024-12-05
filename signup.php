@@ -60,7 +60,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <body>
     <div class="container">
         <div class="signup-box">
-            <h2>KIT2 User Sign Up</h2>
+            <h2 class="logo">KIT2 | Sign Up</h2>
             <?php if ($error): ?>
                 <p class="error-message"><?php echo htmlspecialchars($error); ?></p>
             <?php endif; ?>
