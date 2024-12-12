@@ -82,12 +82,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                 <div class="form-group">
                     <label for="pass">Password:</label>
-                    <input type="password" id="pass" name="pass" placeholder="Enter your password" required>
+                    <input type="password" id="pass" name="pass" placeholder="Enter a complex password" required>
                 </div>
 
                 <div class="form-group">
                     <label for="confirm_pass">Confirm Password:</label>
-                    <input type="password" id="confirm_pass" name="confirm_pass" placeholder="Re-enter your password" required>
+                    <input type="password" id="confirm_pass" name="confirm_pass" placeholder="Re-enter the password" required>
                 </div>
 
                 <div class="form-group">
