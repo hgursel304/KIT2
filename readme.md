@@ -44,3 +44,8 @@ Follow the steps below to set up the KIT2 application on your local environment.
 ```bash
 git clone https://github.com/yourusername/kit2.git
 cd kit2
+```
+### 2. Setup database
+```bash
+http://localhost/KIT2/setup.php
+```
