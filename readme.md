@@ -25,7 +25,7 @@ KIT2 enhances motivation and communication by creating a supportive environment 
    - Users can update their profile information and upload a profile picture.
 
 ### 5. **Setup Process**
-   - First-time users are guided through a setup process to configure the database and create an admin user.
+   - First-time users are guided through a setup process to configure the database and create a the first user.
    - Automatic detection of database configuration ensures the app is ready to use after the setup.
 
 ---
@@ -42,12 +42,13 @@ Follow the steps below to set up the KIT2 application on your local environment.
 
 ---
 
-### 1. Clone the Repository
+### 1. Clone the Repository in your webserver folder
 ```bash
-git clone https://github.com/yourusername/kit2.git
-cd kit2
+git clone https://github.com/hgursel304/kit2.git
 ```
 ### 2. Setup database
 ```bash
 http://localhost/KIT2/setup.php
 ```
+### 3. Create first user
+### 4. Login
